@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Valentine 💗</title>
+
+<style>
+    body {
+        margin: 0;
+        height: 100vh;
+        overflow: hidden;
+        font-family: 'Comic Sans MS', cursive;
+        background: #ffdde1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .page {
+        text-align: center;
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    h1 {
+        color: #ff3366;
+        font-size: 40px;
+        margin-bottom: 30px;
+    }
+
+    button {
+        padding: 15px 30px;
+        font-size: 20px;
+        border: none;
+        border-radius: 30px;
+        cursor: pointer;
+        transition: 0.3s;
+    }
+
+    #yesBtn {
+        background: #ff3366;
+        color: white;
+        position: relative;
+    }
+
+    #noBtn {
+        background: #999;
+        color: white;
+        position: absolute;
+    }
+
+    /* Second Page */
+    #page2 {
+        display: none;
+        background: #ffb6c1;
+    }
+
+    .love-text {
+        font-size: 38px;
+        color: #b3003b;
+        margin-bottom: 20px;
+    }
+
+    .small-text {
+        font-size: 24px;
+        color: #800020;
+    }
+
+    /* Hearts animation */
+    .heart {
+        position: absolute;
+        width: 20px;
+        height: 20px;
+        background: red;
+        transform: rotate(45deg);
+        animation: float 5s linear infinite;
+    }
+
+    .heart::before,
+    .heart::after {
+        content: '';
+        position: absolute;
+        width: 20px;
+        height: 20px;
+        background: red;
+        border-radius: 50%;
+    }
+
+    .heart::before {
+        top: -10px;
+        left: 0;
+    }
+
+    .heart::after {
+        left: -10px;
+        top: 0;
+    }
+
+    @keyframes float {
+        0% {
+            transform: translateY(0) rotate(45deg);
+            opacity: 1;
+        }
+        100% {
+            transform: translateY(-800px) rotate(45deg);
+            opacity: 0;
+        }
+    }
+</style>
+</head>
+
+<body>
+
+<!-- PAGE 1 -->
+<div class="page" id="page1">
+    <h1>Will you be my Valentine? 💗</h1>
+    <button id="yesBtn">YES</button>
+    <button id="noBtn">NO</button>
+</div>
+
+<!-- PAGE 2 -->
+<div class="page" id="page2">
+    <div class="love-text">That's the best decision you ever made 💖</div>
+    <div class="small-text">
+        I love you soooooo much 💗<br>
+        You are the best thing happened to me
+    </div>
+</div>
+
+<script>
+    const noBtn = document.getElementById("noBtn");
+    const yesBtn = document.getElementById("yesBtn");
+    const page1 = document.getElementById("page1");
+    const page2 = document.getElementById("page2");
+
+    let yesSize = 20;
+
+    // Move NO button randomly
+    noBtn.addEventListener("mouseover", () => {
+        const x = Math.random() * (window.innerWidth - 100);
+        const y = Math.random() * (window.innerHeight - 100);
+        noBtn.style.left = x + "px";
+        noBtn.style.top = y + "px";
+
+        yesSize += 5;
+        yesBtn.style.fontSize = yesSize + "px";
+    });
+
+    // YES click
+    yesBtn.addEventListener("click", () => {
+        page1.style.display = "none";
+        page2.style.display = "flex";
+    });
+
+    // Heart animation
+    setInterval(() => {
+        const heart = document.createElement("div");
+        heart.className = "heart";
+        heart.style.left = Math.random() * window.innerWidth + "px";
+        heart.style.bottom = "0px";
+        heart.style.animationDuration = (3 + Math.random() * 3) + "s";
+        document.body.appendChild(heart);
+
+        setTimeout(() => {
+            heart.remove();
+        }, 6000);
+    }, 300);
+</script>
+
+</body>
+</html>
